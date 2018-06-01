@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":6,
+    "selectedBox":6,
+    "selecteID":3,
     "props":{"width":800,"sceneColor":"#ffffff","height":600},
     "nodeParent":-1,
     "label":"View",
@@ -41,7 +41,7 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "props":{"x":3,"var":"normal","skin":"ui/mouse_normal_1.png"},
+                    "props":{"y":8,"x":6,"var":"normal","skin":"ui/mouse_normal_1.png"},
                     "nodeParent":6,
                     "label":"Image(normal)",
                     "isOpen":false,
@@ -64,7 +64,7 @@
                     "compId":4,
                     "child":[
                         ],
-                    "$HIDDEN":false
+                    "$HIDDEN":true
                 },
                 {
                     "x":30,

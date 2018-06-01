@@ -11,7 +11,10 @@ var __extends = (this && this.__extends) || (function () {
 var GameView = /** @class */ (function (_super) {
     __extends(GameView, _super);
     function GameView() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.mole = new Mole(_this.normal, _this.hit, 31);
+        _this.mole.show();
+        return _this;
     }
     return GameView;
 }(ui.GameUI));

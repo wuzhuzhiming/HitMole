@@ -4,7 +4,11 @@ class GameView extends ui.GameUI {
     constructor() {
         super();
 
-        this.mole = new Mole(this.normal, this.hit, 31);
+        this.mole = new Mole(this.normal, this.hit, 29);
+        Laya.timer.loop(2000, this, this.onLoop);
+    }
+
+    onLoop() : void {
         this.mole.show();
     }
 }

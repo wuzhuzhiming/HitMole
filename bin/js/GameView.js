@@ -12,10 +12,13 @@ var GameView = /** @class */ (function (_super) {
     __extends(GameView, _super);
     function GameView() {
         var _this = _super.call(this) || this;
-        _this.mole = new Mole(_this.normal, _this.hit, 31);
-        _this.mole.show();
+        _this.mole = new Mole(_this.normal, _this.hit, 29);
+        Laya.timer.loop(2000, _this, _this.onLoop);
         return _this;
     }
+    GameView.prototype.onLoop = function () {
+        this.mole.show();
+    };
     return GameView;
 }(ui.GameUI));
 //# sourceMappingURL=GameView.js.map

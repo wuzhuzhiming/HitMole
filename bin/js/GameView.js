@@ -12,12 +12,21 @@ var GameView = /** @class */ (function (_super) {
     __extends(GameView, _super);
     function GameView() {
         var _this = _super.call(this) || this;
-        _this.mole = new Mole(_this.normal, _this.hit, 29);
-        Laya.timer.loop(2000, _this, _this.onLoop);
+        _this.moleNum = 9;
+        //创建地鼠
+        _this.moles = new Array();
+        for (var i = 0; i < _this.moleNum; i++) {
+            var box = _this.getChildByName("item" + i);
+            var mole = new Mole(box.getChildByName("normal"), box.getChildByName("hit"), 29);
+            _this.moles.push(mole);
+        }
+        //开始循环
+        Laya.timer.loop(1000, _this, _this.onLoop);
         return _this;
     }
     GameView.prototype.onLoop = function () {
-        this.mole.show();
+        var index = Math.floor(Math.random() * this.moleNum);
+        this.moles[index].show();
     };
     return GameView;
 }(ui.GameUI));

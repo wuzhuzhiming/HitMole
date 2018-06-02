@@ -2,13 +2,13 @@
 
 class Mole {
     private normalState:Laya.Image;
-    private hitState:Laya.Image;
-    private downY:number;
-    private upY:number;
+    private hitState : Laya.Image;
+    private downY : number;
+    private upY : number;
 
-    private isActive:boolean;
-    private isShow:boolean;
-    private isHit:boolean;
+    private isActive : boolean;
+    private isShow : boolean;
+    private isHit : boolean;
 
     constructor(normalState:Laya.Image, hitState:Laya.Image, downY:number) {
         this.normalState = normalState;

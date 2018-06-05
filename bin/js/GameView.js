@@ -14,6 +14,7 @@ var GameView = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.moleNum = 9;
         _this.score = 0;
+        _this.timeBarLen = 30;
         //创建地鼠
         _this.moles = new Array();
         var hitCallBackHD = Laya.Handler.create(_this, _this.setScore, null, false);
@@ -23,15 +24,12 @@ var GameView = /** @class */ (function (_super) {
             _this.moles.push(mole);
         }
         //隐藏光标，添加鼠标按下与移动的处理
-        Laya.Mouse.hide();
         Laya.stage.on(Laya.Event.MOUSE_DOWN, _this, _this.onMouseDown);
         Laya.stage.on(Laya.Event.MOUSE_MOVE, _this, _this.onMouseMove);
-        //开始循环
-        Laya.timer.loop(1000, _this, _this.onLoop);
         return _this;
     }
     GameView.prototype.onLoop = function () {
-        this.timeBar.value -= 1 / 60;
+        this.timeBar.value -= 1 / this.timeBarLen;
         if (this.timeBar.value <= 0) {
             this.gameOver();
             return;
@@ -39,10 +37,30 @@ var GameView = /** @class */ (function (_super) {
         var index = Math.floor(Math.random() * this.moleNum);
         this.moles[index].show();
     };
+    GameView.prototype.gameStart = function () {
+        //隐藏光标，添加鼠标按下与移动的处理
+        Laya.Mouse.hide();
+        this.hammerImg.visible = true;
+        //开始循环
+        this.timeBar.value = this.timeBarLen;
+        this.score = 0;
+        this.updateScoreUI();
+        Laya.timer.loop(1000, this, this.onLoop);
+    };
     GameView.prototype.gameOver = function () {
+        //显示光标
+        Laya.Mouse.show();
+        this.hammerImg.visible = false;
         //停止主循环
         Laya.timer.clear(this, this.onLoop);
-        console.log("游戏结束！");
+        if (!GameMain.viewGameOver) {
+            GameMain.viewGameOver = new view.GameOver();
+        }
+        //显示游戏结束页面
+        GameMain.viewGameOver.centerX = 0;
+        GameMain.viewGameOver.centerY = 0;
+        GameMain.viewGameOver.updateScoreUI(this.score);
+        Laya.stage.addChild(GameMain.viewGameOver);
     };
     GameView.prototype.setScore = function (type) {
         this.score += type === 1 ? -100 : 100;

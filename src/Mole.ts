@@ -22,7 +22,6 @@ class Mole {
         this.hitCallBackHD = hitCallBackHD;
         this.upY = this.normalState.y;
         this.scoreY = scoreImg.y;
-        console.log(this.scoreY);
         this.reset();
         this.normalState.on(Laya.Event.MOUSE_DOWN, this, this.hit);
     }

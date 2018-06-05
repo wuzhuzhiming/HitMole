@@ -2,6 +2,7 @@ class GameView extends ui.GameUI {
     private moles : Array<Mole>;
     private moleNum : number = 9;
     private score : number = 0;
+    private timeBarLen : number = 30;
 
     constructor() {
         super();
@@ -17,16 +18,12 @@ class GameView extends ui.GameUI {
         }
 
         //隐藏光标，添加鼠标按下与移动的处理
-        Laya.Mouse.hide();
         Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.onMouseDown);
         Laya.stage.on(Laya.Event.MOUSE_MOVE, this, this.onMouseMove);
-
-        //开始循环
-        Laya.timer.loop(1000, this, this.onLoop);
     }
 
     onLoop() : void {
-        this.timeBar.value -= 1/60;
+        this.timeBar.value -= 1 / this.timeBarLen;
         if (this.timeBar.value <= 0) {
             this.gameOver();
             return;
@@ -36,10 +33,34 @@ class GameView extends ui.GameUI {
         this.moles[index].show();
     }
 
+    gameStart() : void {
+        //隐藏光标，添加鼠标按下与移动的处理
+        Laya.Mouse.hide();
+        this.hammerImg.visible = true;
+
+        //开始循环
+        this.timeBar.value = this.timeBarLen;
+        this.score = 0;
+        this.updateScoreUI();
+        Laya.timer.loop(1000, this, this.onLoop);
+    }
+
     gameOver() : void {
+        //显示光标
+        Laya.Mouse.show();
+        this.hammerImg.visible = false;
         //停止主循环
         Laya.timer.clear(this, this.onLoop);
-        console.log("游戏结束！");
+
+        if (!GameMain.viewGameOver) {
+            GameMain.viewGameOver = new view.GameOver();
+        }
+
+        //显示游戏结束页面
+        GameMain.viewGameOver.centerX = 0;
+        GameMain.viewGameOver.centerY = 0;
+        GameMain.viewGameOver.updateScoreUI(this.score);
+        Laya.stage.addChild(GameMain.viewGameOver);
     }
 
     setScore(type:number) : void {

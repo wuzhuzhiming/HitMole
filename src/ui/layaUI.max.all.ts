@@ -19,3 +19,36 @@ module ui {
 
     }
 }
+
+module ui {
+    export class GameOverUI extends View {
+		public btnRestart:Laya.Button;
+		public scoreNums:Laya.Box;
+
+        public static  uiView:any ={"type":"View","props":{"width":500,"height":300},"child":[{"type":"Image","props":{"y":0,"x":0,"width":500,"skin":"ui/overBg.png","sizeGrid":"20,20,20,20","height":300}},{"type":"Button","props":{"y":179,"x":161,"var":"btnRestart","stateNum":2,"skin":"ui/btn_restart.png"}},{"type":"Image","props":{"y":66,"x":30,"skin":"ui/total Score.png"}},{"type":"Box","props":{"y":100,"x":265,"var":"scoreNums"},"child":[{"type":"Clip","props":{"skin":"ui/clip_number.png","name":"item0","clipX":10}},{"type":"Clip","props":{"x":18,"skin":"ui/clip_number.png","name":"item1","clipX":10}},{"type":"Clip","props":{"x":36,"skin":"ui/clip_number.png","name":"item2","clipX":10}},{"type":"Clip","props":{"x":54,"skin":"ui/clip_number.png","name":"item3","clipX":10}},{"type":"Clip","props":{"x":72,"skin":"ui/clip_number.png","name":"item4","clipX":10}},{"type":"Clip","props":{"x":90,"skin":"ui/clip_number.png","name":"item5","clipX":10}},{"type":"Clip","props":{"x":108,"skin":"ui/clip_number.png","name":"item6","clipX":10}},{"type":"Clip","props":{"x":126,"skin":"ui/clip_number.png","name":"item7","clipX":10}},{"type":"Clip","props":{"x":144,"skin":"ui/clip_number.png","name":"item8","clipX":10}},{"type":"Clip","props":{"x":162,"skin":"ui/clip_number.png","name":"item9","clipX":10}}]}]};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(ui.GameOverUI.uiView);
+
+        }
+
+    }
+}
+
+module ui {
+    export class GameStartUI extends View {
+		public btnGameStart:Laya.Button;
+
+        public static  uiView:any ={"type":"View","props":{"width":800,"height":600},"child":[{"type":"Image","props":{"y":55,"x":38,"skin":"ui/help.png"}},{"type":"Button","props":{"y":402,"x":311,"var":"btnGameStart","stateNum":2,"skin":"ui/btn_start.png"}}]};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(ui.GameStartUI.uiView);
+
+        }
+
+    }
+}
